@@ -1,6 +1,7 @@
 require_relative "bishop_rook_queen.rb"
 require_relative "knightking.rb"
 require_relative "pawn.rb"
+require_relative "display.rb"
 
 class Board
     attr_accessor :board
@@ -84,5 +85,13 @@ class Board
         #     raise "off the board"
         # end 
 
+    end 
+
+    def on_board?(pos)
+        row, col = pos
+        if !(0..7).to_a.include?(row) || !(0..7).to_a.include?(col)
+            return false
+        end
+        true 
     end 
 end 
