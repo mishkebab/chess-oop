@@ -63,7 +63,7 @@ class Board
     def move_piece(start_pos, end_pos, override = false) 
         if !override
             if !self[start_pos].valid_moves.include?(end_pos)
-                raise "not a valid move"
+                raise ValidError
             end 
         end 
 
@@ -72,21 +72,6 @@ class Board
         self[end_pos].pos = end_pos 
 
         self[start_pos] = NullPiece.instance
-
-        # if @board[start_pos[0]][start_pos[1]].empty?
-        #     raise "no piece at position"
-        # end
-
-        # row, col = end_pos
-        # if !(0..7).to_a.include?(row) || !(0..7).to_a.include?(col)
-        #     raise "off the board"
-        # end 
-
-        # row, col = start_pos
-        # if !(0..7).to_a.include?(row) || !(0..7).to_a.include?(col)
-        #     raise "off the board"
-        # end 
-
     end 
 
     def in_check?(color)
@@ -145,4 +130,7 @@ class Board
     end 
 
 
+end 
+
+class ValidError < StandardError
 end 

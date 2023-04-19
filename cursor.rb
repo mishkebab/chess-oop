@@ -45,6 +45,10 @@ class Cursor
     handle_key(key)
   end
 
+  def toggle_selected
+    @selected = !@selected
+  end
+
   private
 
   def read_char
@@ -89,10 +93,6 @@ class Cursor
     else
       get_input
     end
-  end
-
-  def toggle_selected
-    @selected = !@selected
   end
 
   def update_pos(diff)

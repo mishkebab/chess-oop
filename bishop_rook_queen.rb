@@ -6,9 +6,9 @@ class Bishop < Piece
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = :♗
-        else 
             @symbol = :♝
+        else 
+            @symbol = :♗
         end 
     end 
     def move_dirs 
@@ -25,9 +25,9 @@ class Rook < Piece
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = :♖
-        else 
             @symbol = :♜
+        else 
+            @symbol = :♖
         end 
     end 
     def move_dirs 
@@ -44,9 +44,9 @@ class Queen < Piece
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = :♕
-        else 
             @symbol = :♛
+        else 
+            @symbol = :♕
         end 
     end 
     def move_dirs 

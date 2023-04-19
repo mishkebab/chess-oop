@@ -4,9 +4,9 @@ class Pawn < Piece
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = :♙
-        else 
             @symbol = :♟
+        else 
+            @symbol = :♙
         end 
     end 
 
@@ -53,7 +53,7 @@ class Pawn < Piece
     def side_attacks
         attacks = []
         left_attack = [(self.pos[0] + forward_dir), pos[1] - 1]
-        right_attack = [(self.pos[1] + forward_dir), pos[1] + 1]
+        right_attack = [(self.pos[0] + forward_dir), pos[1] + 1]
         if self.on_board?(left_attack) && @board[left_attack].color && @board[left_attack].color != self.color
             attacks << left_attack
         end 
