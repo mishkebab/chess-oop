@@ -69,4 +69,8 @@ class Pawn < Piece
         forward_steps + side_attacks
     end 
 
+    def dup(dup_board)
+        return Pawn.new(@color, dup_board, @pos)
+    end 
+
 end 

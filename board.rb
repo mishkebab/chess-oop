@@ -43,11 +43,11 @@ class Board
 
         #MAKING KINGS
         @board[0][3] = King.new(:w, self, [0,3])
-        @board[7][4] = King.new(:b, self, [7,4])
+        @board[7][3] = King.new(:b, self, [7,3])
 
         #MAKING QUEENS
         @board[0][4] = Queen.new(:w, self, [0,4])
-        @board[7][3] = Queen.new(:b, self, [7,3])
+        @board[7][4] = Queen.new(:b, self, [7,4])
 
 
     end 
@@ -60,9 +60,11 @@ class Board
         @board[pos[0]][pos[1]] = val
     end 
 
-    def move_piece(start_pos, end_pos) 
-        if !self[start_pos].moves.include?(end_pos)
-            raise "not a valid move"
+    def move_piece(start_pos, end_pos, override = false) 
+        if !override
+            if !self[start_pos].valid_moves.include?(end_pos)
+                raise "not a valid move"
+            end 
         end 
 
         self[end_pos] = self[start_pos] 
@@ -105,6 +107,25 @@ class Board
         opp_move_arr.include?(king_pos) 
     end 
 
+    def valid_moves(color)
+        results = []
+        board.each do |row|
+            row.each do |piece|
+                if piece.color == color
+                    results += piece.valid_moves
+                end
+            end
+        end
+        results 
+    end 
+    def checkmate?(color)
+        if in_check?(color) && self.valid_moves(color).length < 1
+            return true
+        else
+            return false
+        end 
+    end 
+
     def on_board?(pos)
         row, col = pos
         if !(0..7).to_a.include?(row) || !(0..7).to_a.include?(col)
@@ -112,4 +133,16 @@ class Board
         end
         true 
     end 
+
+    def board_dup(board)
+        dup = Board.new
+        @board.each_with_index do |row, idx|
+            row.each_with_index do |piece, idx2|
+                dup[[idx, idx2]] = piece.dup(dup)
+            end
+        end
+        dup
+    end 
+
+
 end 

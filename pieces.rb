@@ -17,7 +17,8 @@ class Piece
     end     
 
     def valid_moves
-        return self.moves
+        poss_moves = self.moves 
+        poss_moves.select {|move| !self.move_into_check?(move)}
     end 
 
     def pos=(val)
@@ -38,7 +39,9 @@ class Piece
 
     private 
     def move_into_check?(end_pos)
-        return false
+        dup_board = self.board.board_dup(@board)
+        dup_board.move_piece(@pos, end_pos, true)
+        dup_board.in_check?(@color)
     end 
 end 
 
@@ -53,5 +56,9 @@ class NullPiece < Piece
 
     def empty?
         return true 
+    end 
+
+    def dup(dup_board)
+        return NullPiece.instance
     end 
 end 
