@@ -1,5 +1,4 @@
-require_relative "modules.rb"
-require_relative "pieces.rb"
+
 
 class King < Piece
     include Stepable

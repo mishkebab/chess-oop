@@ -1,13 +1,16 @@
 require "singleton"
-require_relative "board.rb"
 
 class Piece
-    attr_reader :color, :board, :pos
+    attr_reader :color, :board, :pos, :symbol
     def initialize(color, board, pos)
         @color = color
         @board = board
         @pos = pos
     end
+
+    def to_s
+        return symbol.to_s
+    end 
 
     def empty?
         return false 
@@ -22,7 +25,7 @@ class Piece
     end 
 
     def symbol
-        @symbol = nil 
+        @symbol
     end
 
     def on_board?(pos)
