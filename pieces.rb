@@ -1,3 +1,6 @@
+require "singleton"
+require_relative "board.rb"
+
 class Piece
     attr_reader :color, :board, :pos
     def initialize(color, board, pos)
@@ -21,6 +24,14 @@ class Piece
     def symbol
         @symbol = nil 
     end
+
+    def on_board?(pos)
+        row, col = pos
+        if !(0..7).to_a.include?(row) || !(0..7).to_a.include?(col)
+            return false
+        end
+        true 
+    end 
 
     private 
     def move_into_check?(end_pos)

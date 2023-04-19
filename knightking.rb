@@ -1,13 +1,14 @@
 require_relative "modules.rb"
+require_relative "pieces.rb"
 
-class King
+class King < Piece
     include Stepable
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = ♔
+            @symbol = :♔
         else 
-            @symbol = ♚
+            @symbol = :♚
         end 
     end 
     def move_diffs
@@ -15,14 +16,14 @@ class King
     end 
 end 
 
-class Knight
+class Knight < Piece
     include Stepable
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = ♘
+            @symbol = :♘
         else 
-            @symbol = ♞
+            @symbol = :♞
         end 
     end 
     def move_diffs

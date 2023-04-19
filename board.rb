@@ -1,11 +1,55 @@
 require_relative "pieces.rb"
+require_relative "bishop_rook_queen.rb"
+require_relative "knightking.rb"
+require_relative "pawn.rb"
 
 class Board
     attr_accessor :board
     def initialize
         @board = Array.new(8) do
-            Array.new(8) {Piece.new}
+            Array.new(8)
         end
+
+        #MAKING PAWNS
+        (0..7).each do |col|
+            @board[1][col] = Pawn.new(:w, self, [1,col])
+            @board[6][col] = Pawn.new(:b, self, [6,col])
+        end
+
+        #MAKING NULLS
+        (2..5).each do |row|
+            (0..7).each do |col|
+                @board[row][col] = NullPiece.instance
+            end
+        end
+
+        #MAKING ROOKS
+        @board[0][0] = Rook.new(:w, self, [0,0])
+        @board[0][7] = Rook.new(:w, self, [0,7])
+        @board[7][0] = Rook.new(:b, self, [7,0])
+        @board[7][7] = Rook.new(:b, self, [7,7])
+
+        #MAKING BISHOPS
+        @board[0][2] = Rook.new(:w, self, [0,2])
+        @board[0][5] = Rook.new(:w, self, [0,5])
+        @board[7][2] = Rook.new(:b, self, [7,2])
+        @board[7][5] = Rook.new(:b, self, [7,5])
+
+        #MAKING KNIGHTS
+        @board[0][1] = Rook.new(:w, self, [0,1])
+        @board[0][6] = Rook.new(:w, self, [0,6])
+        @board[7][1] = Rook.new(:b, self, [7,1])
+        @board[7][6] = Rook.new(:b, self, [7,6])
+
+        #MAKING KINGS
+        @board[0][3] = Rook.new(:w, self, [0,3])
+        @board[7][4] = Rook.new(:b, self, [7,4])
+
+        #MAKING QUEENS
+        @board[0][4] = Rook.new(:w, self, [0,4])
+        @board[7][3] = Rook.new(:b, self, [7,3])
+
+
     end 
 
     def [](pos)

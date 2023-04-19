@@ -1,13 +1,14 @@
 require_relative "modules.rb"
+require_relative "pieces.rb"
 
-class Bishop
+class Bishop < Piece
     include Slideable
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = ♗
+            @symbol = :♗
         else 
-            @symbol = ♝
+            @symbol = :♝
         end 
     end 
     def move_dirs 
@@ -15,14 +16,14 @@ class Bishop
     end 
 end 
 
-class Rook
+class Rook < Piece
     include Slideable
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = ♖
+            @symbol = :♖
         else 
-            @symbol = ♜
+            @symbol = :♜
         end 
     end 
     def move_dirs 
@@ -30,14 +31,14 @@ class Rook
     end 
 end 
 
-class Queen
+class Queen < Piece
     include Slideable
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = ♕
+            @symbol = :♕
         else 
-            @symbol = ♛
+            @symbol = :♛
         end 
     end 
     def move_dirs 

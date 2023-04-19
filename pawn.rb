@@ -1,10 +1,13 @@
-class Pawn
+require_relative "board.rb"
+require_relative "pieces.rb"
+
+class Pawn < Piece
     def initialize(color, board, pos)
         super
         if @color == :w
-            @symbol = ♙
+            @symbol = :♙
         else 
-            @symbol = ♟
+            @symbol = :♟
         end 
     end 
 

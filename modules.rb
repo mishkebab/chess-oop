@@ -5,7 +5,7 @@ module Stepable
             temp = self.pos.map(&:dup) 
             temp[0] += transform[0]
             temp[1] += transform[1]
-            if self.color != self.board[temp].color 
+            if self.on_board?(temp) && self.color != self.board[temp].color 
                 results << temp 
             end
         end 
@@ -37,8 +37,8 @@ module Slideable
         results = []
         potential_dirs.each do |dir|
             limit = grow_unblocked_moves_in_dir(dir[0], dir[1])
+            temp = self.pos.map(&:dup)
             while limit > 0
-                temp = self.pos.map(&:dup)
                 temp[0] += dir[0]
                 temp[1] += dir[1]
                 limit -= 1
@@ -51,12 +51,12 @@ module Slideable
     def grow_unblocked_moves_in_dir(dx, dy)
         count = 0 
         collision = false 
+        cur_pos = self.pos.map(&:dup)
         until collision
-            cur_pos = self.pos.map(&:dup)
             count += 1
             cur_pos[0] += dx
             cur_pos[1] += dy
-            if !(0..7).to_a.include?(cur_pos[0]) || !(0..7).to_a.include?(cur_pos[1])
+            if !self.on_board?(cur_pos)
                 collision = true 
                 count -= 1
             elsif !self.board[cur_pos].empty? 
