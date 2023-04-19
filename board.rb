@@ -87,6 +87,24 @@ class Board
 
     end 
 
+    def in_check?(color)
+        opp_move_arr = []
+        king_pos = []
+        board.each do |row|
+            row.each do |piece|
+                if piece.is_a?(King) && piece.color == color
+                    king_pos = piece.pos
+                end 
+                if piece.color != color && piece.is_a?(Pawn)
+                    opp_move_arr += piece.side_attacks
+                elsif piece.color != color 
+                    opp_move_arr += piece.moves
+                end
+            end
+        end
+        opp_move_arr.include?(king_pos) 
+    end 
+
     def on_board?(pos)
         row, col = pos
         if !(0..7).to_a.include?(row) || !(0..7).to_a.include?(col)

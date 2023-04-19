@@ -19,7 +19,11 @@ class Display
                     temp = " #{board[[row,col]].to_s} "
                 end
                 if cursor.cursor_pos == [row, col]
-                    row_string += temp.colorize(:background => :red)
+                    if cursor.selected == true
+                        row_string += temp.colorize(:background => :red)
+                    else 
+                        row_string += temp.colorize(:background => :green)
+                    end
                 elsif (row + col)%2 == 0 
                     row_string += temp.colorize(:background => :blue)
                 else
@@ -29,4 +33,12 @@ class Display
             puts row_string
         end
     end
+
+    def test_display
+        while true 
+            render
+            p cursor.cursor_pos
+            cursor.get_input
+        end 
+    end 
 end
