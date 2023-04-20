@@ -14,7 +14,9 @@ class Bishop < Piece
     def move_dirs 
         return self.diagonal_dirs
     end 
-
+    def value
+        return 3
+    end
     def dup(dup_board)
         return Bishop.new(@color, dup_board, @pos)
     end 
@@ -33,7 +35,9 @@ class Rook < Piece
     def move_dirs 
         return self.horizontal_dirs
     end 
-
+    def value
+        return 5
+    end
     def dup(dup_board)
         return Rook.new(@color, dup_board, @pos)
     end 
@@ -52,6 +56,9 @@ class Queen < Piece
     def move_dirs 
         return self.horizontal_dirs + self.diagonal_dirs
     end 
+    def value
+        return 9
+    end
 
     def dup(dup_board)
         return Queen.new(@color, dup_board, @pos)

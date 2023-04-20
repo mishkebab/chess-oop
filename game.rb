@@ -3,11 +3,15 @@ require_relative "player.rb"
 
 class Game
     attr_reader :board, :display, :current_player
-    def initialize
+    def initialize(computer = false)
         @board = Board.new
         @display = Display.new(@board)
         @player1 = HumanPlayer.new(:w, @display)
-        @player2 = HumanPlayer.new(:b, @display)
+        if !computer
+            @player2 = HumanPlayer.new(:b, @display)
+        else
+            @player2 = ComputerPlayer.new(:b, @display)
+        end
         @current_player = @player1
     end 
 
@@ -32,6 +36,7 @@ class Game
             @current_player.make_move
             swap_turn!
         end 
+        @display.render
         puts "checkmate - game over!"
     end 
 

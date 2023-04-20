@@ -29,6 +29,9 @@ class Knight < Piece
             @symbol = :♘
         end 
     end 
+    def value
+        return 3
+    end
     def move_diffs
         return [[2,1],[2,-1],[1,2],[1,-2],[-1,2],[-1,-2],[-2,1],[-2,-1]]
     end 

@@ -37,11 +37,16 @@ class Piece
         true 
     end 
 
-    private 
-    def move_into_check?(end_pos)
+    def move_into_check?(end_pos, check_color = @color)
         dup_board = self.board.board_dup(@board)
         dup_board.move_piece(@pos, end_pos, true)
-        dup_board.in_check?(@color)
+        dup_board.in_check?(check_color)
+    end 
+
+    def move_into_checkmate?(end_pos, check_color = @color)
+        dup_board = self.board.board_dup(@board)
+        dup_board.move_piece(@pos, end_pos, true)
+        dup_board.checkmate?(check_color)
     end 
 end 
 
@@ -53,6 +58,10 @@ class NullPiece < Piece
         @symbol = nil
         @moves = []
     end 
+
+    def value
+        return 0
+    end
 
     def empty?
         return true 
